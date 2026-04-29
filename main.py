@@ -13,7 +13,10 @@ def load_data():
         return json.load(f)
 
 def save_data(data):
-    pass
+    with open(data_file, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+expenses = load_data()
 
 def add_expenses():
     pass
@@ -79,4 +82,3 @@ table.pack(pady=10, padx=10, fill="both", expand=True)
 update_expenses()
 
 window.mainloop()
-
