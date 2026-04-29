@@ -79,7 +79,7 @@ ent_date.grid(row=0, column=5, padx=5, pady=5)
 add_button = tk.Button(frame_form, text="Добавить", command=add_expenses)
 add_button.grid(row=0, column=6, padx=5, pady=5)
 
-filter_frame = tk.Label(window, text="Фильтр")
+filter_frame = tk.LabelFrame(window, text="Фильтр")
 filter_frame.pack(pady=5, padx=10)
 
 filter_category = ttk.Combobox(filter_frame, values=["Все", "Еда", "Транспорт", "Развлечения", "Дом"], state="readonly")
