@@ -7,7 +7,10 @@ import os
 data_file = "expenses.json"
 
 def load_data():
-    pass
+    if not os.path.exists(data_file):
+        return []
+    with open(data_file, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 def save_data(data):
     pass
@@ -18,10 +21,9 @@ def add_expenses():
 def update_expenses():
     pass
 
-
 window = tk.Tk()
 window.title("Expense Tracker (Трекер расходов)")
-window.geometry("800x500")
+window.geometry("400x300")
 
 frame_form = ttk.LabelFrame(window, text="Добавить расход")
 frame_form.pack(pady=10, padx=10, fill="x")
@@ -77,6 +79,4 @@ table.pack(pady=10, padx=10, fill="both", expand=True)
 update_expenses()
 
 window.mainloop()
-
-
 
