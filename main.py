@@ -12,14 +12,71 @@ def load_data():
 def save_data(data):
     pass
 
-
 def add_expenses():
     pass
-
 
 def update_expenses():
     pass
 
+
+window = tk.Tk()
+window.title("Expense Tracker (Трекер расходов)")
+window.geometry("800x500")
+
+frame_form = ttk.LabelFrame(window, text="Добавить расход")
+frame_form.pack(pady=10, padx=10, fill="x")
+
+sum_label = tk.Label(frame_form, text="Сумма:")
+sum_label.grid(row=0, column=0, padx=5, pady=5)
+ent_amount = tk.Entry(frame_form)
+ent_amount.grid(row=0, column=1, padx=5, pady=5)
+
+category_label = tk.Label(frame_form, text="Категория:")
+category_label.grid(row=0, column=2, padx=5, pady=5)
+cb_category = ttk.Combobox(frame_form, values=["Еда", "Транспорт", "Развлечения", "Дом"], state="readonly")
+cb_category.grid(row=0, column=3, padx=5, pady=5)
+cb_category.current(0)
+
+data_label = tk.Label(frame_form, text="Дата: ")
+data_label.grid(row=0, column=4, padx=5, pady=5)
+ent_date = ttk.Entry(frame_form)
+ent_date.insert(0, datetime.now().strftime("%Y-%m-%d"))
+ent_date.grid(row=0, column=5, padx=5, pady=5)
+
+add_button = tk.Button(frame_form, text="Добавить", command=add_expenses)
+add_button.grid(row=0, column=6, padx=5, pady=5)
+
+filter_frame = tk.Label(window, text="Фильтр")
+filter_frame.pack(pady=5, padx=10)
+
+filter_category = ttk.Combobox(filter_frame, values=["Все", "Еда", "Транспорт", "Развлечения", "Дом"], state="readonly")
+filter_category.current(0)
+filter_category.pack(side="left", padx=5, pady=5)
+
+ttk.Label(filter_frame, text="С:").pack(side="left", padx=2)
+filter_start = ttk.Entry(filter_frame, width=10)
+filter_start.insert(0, "2024-01-01")
+filter_start.pack(side="left", padx=2)
+ttk.Label(filter_frame, text="По:").pack(side="left", padx=2)
+filter_end = ttk.Entry(filter_frame, width=10)
+filter_end.insert(0, datetime.now().strftime("%Y-%m-%d"))
+filter_end.pack(side="left", padx=2)
+
+filter_button = tk.Button(filter_frame, text="Применить", command=update_expenses)
+filter_button.pack(side="left", padx=5)
+
+label_total = ttk.Label(filter_frame, text="Итого: 0", font="Arial 10")
+label_total.pack(side="right", padx=10)
+
+table = ttk.Treeview(window, columns=("Amount", "Category", "Date"), show="headings")
+table.heading("Amount", text="Сумма")
+table.heading("Category", text="Категория")
+table.heading("Date", text="Дата")
+table.pack(pady=10, padx=10, fill="both", expand=True)
+
+update_expenses()
+
+window.mainloop()
 
 
 
