@@ -39,11 +39,22 @@ def add_expenses():
     ent_amount.delete(0, tk.END)
 
 def update_expenses():
-    pass
+    for row in table.get_children():
+        table.delete(row)
+
+    selected_cat = filter_category.get()
+    total = 0
+
+    for exp in expenses:
+        if selected_cat == "Все" or exp["category"] == selected_cat:
+            table.insert("", "end", values=(exp["amount"], exp["category"], exp["date"]))
+            total += exp["amount"]
+
+    label_total.config(text=f"Итого: {total:.2f}")
 
 window = tk.Tk()
 window.title("Expense Tracker (Трекер расходов)")
-window.geometry("400x300")
+window.geometry("800x500")
 
 frame_form = ttk.LabelFrame(window, text="Добавить расход")
 frame_form.pack(pady=10, padx=10, fill="x")
