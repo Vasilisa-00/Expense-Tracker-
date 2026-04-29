@@ -19,7 +19,24 @@ def save_data(data):
 expenses = load_data()
 
 def add_expenses():
-    pass
+    amount = ent_amount.get()
+    category = cb_category.get()
+    date = ent_date.get()
+
+    try:
+        amount_float = float(amount)
+        if amount_float <= 0: raise ValueError
+        datetime.strptime(date, "%Y-%m-%d")
+
+    except ValueError:
+        messagebox.showerror("Ошибка", "Сумма должна быть > 0, дата: ГГГГ-ММ-ДД")
+        return
+
+    new_item = {"amount": amount_float, "category": category, "date": date}
+    expenses.append(new_item)
+    save_data(expenses)
+    update_expenses()
+    ent_amount.delete(0, tk.END)
 
 def update_expenses():
     pass
