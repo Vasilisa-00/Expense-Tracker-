@@ -1,5 +1,21 @@
 
 .idea/
+
+
+Thumbs.db
+desktop.ini
+
+
 __pycache__/
 *.py[cod]
-expenses.json
+*$py.class
+
+venv/
+ENV/
+.env/
+
+
+*.json
+
+
+.env
